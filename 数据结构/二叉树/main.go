@@ -1,0 +1,95 @@
+package main
+
+type Student struct {
+	id   int
+	name string
+	age  int
+	sex  string
+}
+
+/*
+func main01() {
+	//stu := Student{1006, "宋八", 18, "男"}
+	//stu := Student{1001, "张三", 18, "男"}
+	var slice []interface{} = []interface{}{
+		Student{1001, "张三", 18, "男"},
+		Student{1002, "李四", 18, "男"},
+		Student{1003, "王五", 18, "男"},
+		Student{1004, "赵六", 18, "男"},
+		Student{1005, "刘七", 18, "男"}}
+	var linklist *LinkList = new(LinkList)
+
+	linklist.Create(slice)
+
+	//fmt.Println(linklist)
+	//fmt.Println(linklist.Len())
+	//linklist.Print()
+	//fmt.Println(linklist)
+	//data:=linklist.Search(stu)
+	//fmt.Println(data)
+	//linklist.InsertByHead(stu)
+	//linklist.InsertByTail(stu)
+	//linklist.InsertByIndex(10, stu)
+	//linklist.DeleteByIndex(5)
+	//linklist.DeleteByData(stu)
+	linklist.Destroy()
+	linklist.Print()
+
+}
+*/
+/*
+func main02() {
+	var s Slice
+	s.Create(10, 20, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+	s.Append(11, 22, 33, 44, 55, 66, 77, 88, 99, 111, 222, 333, 444, 555, 666, 777, 888, 999)
+	//fmt.Println(s)
+	//s.Delete(1)
+	//s.Insert(0, 1111)
+	s.Destroy()
+	s.Print()
+
+}
+*/
+
+func main() {
+	var tree BinaryNode
+	tree.CreateTree()
+
+	node1 := BinaryNode{1, nil, nil}
+	node2 := BinaryNode{2, nil, nil}
+	node3 := BinaryNode{3, nil, nil}
+	node4 := BinaryNode{4, nil, nil}
+	node5 := BinaryNode{5, nil, nil}
+	node6 := BinaryNode{6, nil, nil}
+	node7 := BinaryNode{7, nil, nil}
+	tree.Data = 0
+	tree.lChild = &node1
+	tree.rChild = &node2
+	node1.lChild = &node3
+	node1.rChild = &node4
+	node2.lChild = &node5
+	node3.lChild = &node6
+	node3.rChild = &node7
+
+	tree.PreOrder()
+	//tree.MidOrder()
+	//tree.PostOrder()
+	//num := 0
+	//tree.LeafCount(&num)
+	//fmt.Println(num)
+
+	//num := tree.TreeHeight()
+	//fmt.Println(num)
+
+	//tree.Search(9)
+
+	var tree1 *BinaryNode
+	tree1 = tree.CopyTree()
+	//fmt.Println(tree1)
+	tree1.lChild.Data = 333
+	tree1.PreOrder()
+
+	tree.Destroy()
+	tree.PreOrder()
+
+}
