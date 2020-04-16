@@ -14,6 +14,9 @@ func main() {
 	//num7()
 	num7()
 	//numtest123456
+	//numtest
+	//numtest
+
 }
 
 /*
