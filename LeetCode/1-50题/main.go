@@ -9,6 +9,7 @@ func main() {
 	//num2()
 	//num3()
 	num7()
+	//numtest
 }
 
 /*
