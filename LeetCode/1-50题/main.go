@@ -13,7 +13,7 @@ func main() {
 	num5()
 	//num7()
 	num7()
-	//numtest
+	//numtest1
 }
 
 /*
