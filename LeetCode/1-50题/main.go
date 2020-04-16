@@ -230,7 +230,7 @@ nums2 = [3, 4]
 */
 
 func num4() {
-	fmt.Println("findMedianSortedArrays:", findMedianSortedArrays([]int{3}, []int{1, 2, 4, 5}))
+	fmt.Println("findMedianSortedArrays : ", findMedianSortedArrays([]int{3}, []int{1, 2, 4, 5}))
 }
 
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
