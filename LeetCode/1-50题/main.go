@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"go-common-master/app/admin/main/up/util/mathutil"
+	//"go-common-master/app/admin/main/up/util/mathutil"
 	"math"
 	"strconv"
 )
@@ -16,8 +16,106 @@ func main() {
 	//num7()
 	//num9()
 	//num13()
-	num14()
+	//num14()
+	//num20()
+	num21()
+}
 
+/*
+将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+示例：
+输入：1->2->4, 1->3->4
+输出：1->1->2->3->4->4
+*/
+func num21() {
+	l1 := &ListNode{
+		Val: 2,
+		Next: &ListNode{
+			Val: 5,
+			Next: &ListNode{
+				Val:  6,
+				Next: nil,
+			},
+		},
+	}
+	l2 := &ListNode{
+		Val: 5,
+		Next: &ListNode{
+			Val: 6,
+			Next: &ListNode{
+				Val:  7,
+				Next: nil,
+			},
+		},
+	}
+	result := mergeTwoLists(l1, l2)
+	for result != nil {
+		fmt.Print(result.Val, "->")
+		result = result.Next
+	}
+}
+
+func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1 == nil {
+		return l2
+	} else if l2 == nil {
+		return l1
+	} else if l1.Val > l2.Val {
+		l2.Next = mergeTwoLists(l1, l2.Next)
+		return l2
+	} else {
+		l1.Next = mergeTwoLists(l1.Next, l2)
+		return l1
+	}
+}
+
+/*
+给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+
+有效字符串需满足：
+
+左括号必须用相同类型的右括号闭合。
+左括号必须以正确的顺序闭合。
+注意空字符串可被认为是有效字符串。
+*/
+func num20() {
+	//isValid("{({}[]())}")
+	is := isValid("{({}[]())}")
+	fmt.Println(is)
+}
+
+func isValid(s string) bool {
+	stack := make([]byte, 0, len(s))
+	//{}[]()
+	//[123 125 91 93 40 41]
+	for _, v := range []byte(s) {
+		switch v {
+		case 123, 91, 40:
+			stack = append(stack, v)
+		case 125:
+			if len(stack) == 0 || stack[len(stack)-1] != 123 {
+				return false
+			} else {
+				stack = stack[:len(stack)-1]
+			}
+		case 93:
+			if len(stack) == 0 || stack[len(stack)-1] != 91 {
+				return false
+			} else {
+				stack = stack[:len(stack)-1]
+			}
+		case 41:
+			if len(stack) == 0 || stack[len(stack)-1] != 40 {
+				return false
+			} else {
+				stack = stack[:len(stack)-1]
+			}
+		}
+	}
+	if len(stack) == 0 {
+		return true
+	}
+	return false
 }
 
 /*
@@ -301,15 +399,15 @@ func longestPalindrome(s string) string {
 		return s
 	}
 	var start, end int
-	for i, _ := range s {
-		l1 := expandAroundCenter(s, i, i)
-		l2 := expandAroundCenter(s, i, i+1)
-		max := mathutil.Max(l1, l2)
-		if max > end-start {
-			start = i - (max-1)/2
-			end = i + max/2
-		}
-	}
+	//for i, _ := range s {
+	//l1 := expandAroundCenter(s, i, i)
+	//l2 := expandAroundCenter(s, i, i+1)
+	////max := mathutil.Max(l1, l2)
+	//if max > end-start {
+	//	start = i - (max-1)/2
+	//	end = i + max/2
+	//}
+	//}
 	return s[start : end+1]
 }
 
