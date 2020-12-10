@@ -18,7 +18,135 @@ func main() {
 	//num13()
 	//num14()
 	//num20()
-	num21()
+	//num21()
+	//num26()
+	//num27()
+	//num28()
+	num35()
+}
+
+/**
+给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+你可以假设数组中无重复元素。
+示例 1:
+输入: [1,3,5,6], 5
+输出: 2
+*/
+
+func num35() {
+	nums := []int{1, 3, 5, 6}
+	target := 2
+	r := searchInsert(nums, target)
+	fmt.Println(r)
+}
+
+func searchInsert(nums []int, target int) int {
+	n := 0
+	for i, v := range nums {
+		if target > v {
+			n = i + 1
+		}
+		if v == target {
+			return i
+		}
+	}
+	return n
+}
+
+func num28() {
+	i := strStr("hello", "ll")
+	fmt.Println(i)
+}
+
+/**
+实现 strStr() 函数。
+
+给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+
+示例 1:
+
+输入: haystack = "hello", needle = "ll"
+输出: 2
+*/
+func strStr(haystack string, needle string) int {
+	lh, ln := len(haystack), len(needle)
+	for i := 0; i < lh-ln+1; i++ {
+		fmt.Println(haystack[i : i+ln])
+		if haystack[i:i+ln] == needle {
+			return i
+		}
+	}
+	return -1
+}
+
+/**
+给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
+不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
+元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+
+示例 1:
+
+给定 nums = [3,2,2,3], val = 3,
+函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。
+你不需要考虑数组中超出新长度后面的元素。
+*/
+
+func num27() {
+	nums := []int{0, 1, 2, 2, 3, 0, 4, 2}
+	n := removeElement(nums, 2)
+	fmt.Println(nums)
+	fmt.Println(n)
+}
+
+func removeElement(nums []int, val int) int {
+	i := 0
+	for j := 0; j < len(nums); j++ {
+		if nums[j] != val {
+			nums[i] = nums[j]
+			i++
+		}
+	}
+	return i
+}
+
+/**
+给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
+
+不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+
+
+
+示例 1:
+
+给定数组 nums = [1,1,2],
+
+函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。
+
+你不需要考虑数组中超出新长度后面的元素。
+
+*/
+
+func num26() {
+	nums := []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}
+	res, n := removeDuplicates(nums)
+	fmt.Println(nums)
+	fmt.Println(res)
+	fmt.Println(n)
+}
+
+func removeDuplicates(nums []int) (resNums []int, i int) {
+	if len(nums) == 0 {
+		return
+	}
+	for j := 1; j < len(nums); j++ {
+		if nums[i] != nums[j] {
+			i++
+			nums[i] = nums[j]
+		}
+	}
+	resNums = nums[:i+1]
+	fmt.Println(resNums)
+	return resNums, i + 1
 }
 
 /*
