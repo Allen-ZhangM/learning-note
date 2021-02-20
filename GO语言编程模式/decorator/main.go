@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"reflect"
 	"runtime"
 	"time"
@@ -17,7 +18,7 @@ func main() {
 	//http.HandleFunc("/v1/hello", WithServerHeader(WithAuthCookie(hello)))
 	//http.HandleFunc("/v2/hello", WithServerHeader(WithBasicAuth(hello)))
 	//http.HandleFunc("/v3/hello", WithServerHeader(WithBasicAuth(WithDebugLog(hello))))
-	//http.HandleFunc("/v3/hello", Handler(hello,WithAuthCookie))
+	http.HandleFunc("/v3/hello", Handler(hello, WithAuthCookie, WithBasicAuth, WithDebugLog))
 	//err := http.ListenAndServe(":8080", nil)
 	//if err != nil {
 	//	log.Fatal("ListenAndServe: ", err)
