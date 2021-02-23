@@ -22,7 +22,40 @@ func main() {
 	//num26()
 	//num27()
 	//num28()
-	num35()
+	//num35()
+	num38()
+}
+
+/**
+https://leetcode-cn.com/problems/count-and-say/
+*/
+func num38() {
+	fmt.Println(countAndSay(30))
+}
+
+func countAndSay(n int) string {
+	res := "1"
+
+	var val uint8
+	var r string
+	count := 1
+	for i := 0; i < n-1; i++ {
+		count = 1
+		val = 0
+		r = ""
+		for ii := 0; ii < len(res); ii++ {
+			val = res[ii]
+			if ii == len(res)-1 || res[ii+1] != val {
+				r += fmt.Sprintf("%s%s", strconv.Itoa(count), string(val))
+				count = 1
+				continue
+			}
+			count++
+		}
+		res = r
+	}
+
+	return res
 }
 
 /**
@@ -32,7 +65,6 @@ func main() {
 输入: [1,3,5,6], 5
 输出: 2
 */
-
 func num35() {
 	nums := []int{1, 3, 5, 6}
 	target := 2
