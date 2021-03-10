@@ -36,7 +36,7 @@ type ListNode struct {
 }
 
 func reverseList(head *ListNode) *ListNode {
-	headNew := &ListNode{}
+	var headNew *ListNode
 	current := head
 	for current != nil {
 		next := current.Next
