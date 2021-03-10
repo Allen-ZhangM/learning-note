@@ -3,7 +3,48 @@ package main
 import "fmt"
 
 func main() {
-	num236()
+	num206()
+	//num236()
+}
+
+/**
+反转链表
+https://leetcode-cn.com/problems/reverse-linked-list/
+*/
+func num206() {
+	node := &ListNode{
+		Val: 1,
+		Next: &ListNode{
+			Val: 2,
+			Next: &ListNode{
+				Val: 3,
+				Next: &ListNode{
+					Val:  4,
+					Next: nil,
+				},
+			},
+		},
+	}
+	fmt.Println(node)
+	node2 := reverseList(node)
+	fmt.Println(node2)
+}
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func reverseList(head *ListNode) *ListNode {
+	headNew := &ListNode{}
+	current := head
+	for current != nil {
+		next := current.Next
+		current.Next = headNew
+		headNew = current
+		current = next
+	}
+	return headNew
 }
 
 /*
