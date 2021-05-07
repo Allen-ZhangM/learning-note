@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/go-redis/redis"
-	"github.com/go-redis/redismock/v8"
+	"github.com/go-redis/redismock"
 	"testing"
 	"time"
 )
@@ -15,11 +15,16 @@ var ctx = context.TODO()
 func NewsInfoForCache(redisDB *redis.Client, newsID int) (info string, err error) {
 	cacheKey := fmt.Sprintf("news_redis_cache_%d", newsID)
 	info, err = redisDB.Get(ctx, cacheKey).Result()
-	if err == redis.Nil {
-		// info, err = call api()
-		info = "test"
-		err = redisDB.Set(ctx, cacheKey, info, 30*time.Minute).Err()
+
+	// info, err = call api()
+	info = "test"
+	err = redisDB.Set(ctx, cacheKey, info, 30*time.Minute).Err()
+
+	s, err := redisDB.SMembers(ctx, "smber").Result()
+	if err != nil {
+		fmt.Println(err)
 	}
+	fmt.Println(s)
 	return
 }
 
@@ -33,6 +38,7 @@ func TestNewsInfoForCache(t *testing.T) {
 
 	mock.ExpectGet(key).SetVal("value")
 	mock.Regexp().ExpectSet(key, `[a-z]+`, 30*time.Minute).SetErr(errors.New("FAIL"))
+	mock.Regexp().ExpectSMembers("smber").SetVal([]string{"1", "2"})
 
 	_, err := NewsInfoForCache(db, newsID)
 	if err == nil || err.Error() != "FAIL" {
