@@ -25,6 +25,14 @@ func NewsInfoForCache(redisDB *redis.Client, newsID int) (info string, err error
 		fmt.Println(err)
 	}
 	fmt.Println(s)
+
+	err = redisDB.Expire(ctx, "expire", time.Minute).Err()
+
+	err = redisDB.SAdd(ctx, "sadd").Err()
+	if err != nil {
+		fmt.Println(err)
+	}
+
 	return
 }
 
@@ -39,6 +47,8 @@ func TestNewsInfoForCache(t *testing.T) {
 	mock.ExpectGet(key).SetVal("value")
 	mock.Regexp().ExpectSet(key, `[a-z]+`, 30*time.Minute).SetErr(errors.New("FAIL"))
 	mock.Regexp().ExpectSMembers("smber").SetVal([]string{"1", "2"})
+	mock.Regexp().ExpectExpire("expire", time.Minute).SetVal(true)
+	mock.Regexp().ExpectSAdd("sadd").SetErr(errors.New("FAIL"))
 
 	_, err := NewsInfoForCache(db, newsID)
 	if err == nil || err.Error() != "FAIL" {
