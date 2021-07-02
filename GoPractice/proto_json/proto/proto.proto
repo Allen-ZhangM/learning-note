@@ -1,0 +1,18 @@
+//protoc --go_out=./ *.proto
+syntax = "proto3";
+package my_grpc_proto;
+option go_package = "/";
+message LastClickMd5Info{
+  int32 account_id = 1;
+  string campaign_id = 2;
+  string adgroup_id = 3;
+  string ad_id = 4;
+  string dtu = 5;
+  string platform = 6;
+  int32 channel_id = 7;
+  string category_id = 8;
+  string product_id = 9;
+  string extension_id = 10;
+  string click_time = 11;
+}
+
