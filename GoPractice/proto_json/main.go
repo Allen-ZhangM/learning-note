@@ -1,6 +1,10 @@
 package main
 
 import (
+	"bytes"
+	"crypto/md5"
+	"encoding/binary"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"github.com/golang/protobuf/proto"
@@ -42,4 +46,30 @@ func main() {
 	//proto序列化后byte长度为(空结构，常规数据，大量英文，大量中文)：0,89,944,1610；
 	//序列化后len差值为：165,154,151,151；
 	//可见proto节省的就是结构体key的长度，key越长，value越小，proto节省空间的效果越好；
+}
+
+//返回一个32位md5加密后的小写字符串
+func GetMD5LowerHash(data string) string {
+	h := md5.New()
+	h.Write([]byte(data))
+	return hex.EncodeToString(h.Sum(nil))
+}
+
+//整形转换成字节
+func IntToBytes(n int64) []byte {
+	x := n
+
+	bytesBuffer := bytes.NewBuffer([]byte{})
+	binary.Write(bytesBuffer, binary.BigEndian, x)
+	return bytesBuffer.Bytes()
+}
+
+//字节转换成整形
+func BytesToInt(b []byte) int {
+	bytesBuffer := bytes.NewBuffer(b)
+
+	var x int32
+	binary.Read(bytesBuffer, binary.BigEndian, &x)
+
+	return int(x)
 }
