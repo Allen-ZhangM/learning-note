@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
-	"learning-note/nsq-go/agent"
-	"learning-note/nsq-go/consumer"
+	"learning-note/sdk/nsq-go/agent"
+	"learning-note/sdk/nsq-go/consumer"
 )
 
 func initLogger() {
