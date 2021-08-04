@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"google.golang.org/grpc"
-	pt "learning-note/rpc/grpc-proto/proto"
+	pt "learning-note/GoPractice/rpc/grpc-proto/proto"
 	"testing"
 	"time"
 )

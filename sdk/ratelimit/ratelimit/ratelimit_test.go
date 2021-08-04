@@ -3,8 +3,6 @@ package simpleratelimit
 import (
 	"testing"
 	"time"
-
-	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestLimit(t *testing.T) {

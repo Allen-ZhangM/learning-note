@@ -28,7 +28,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"learning-note/ants"
+	"learning-note/sdk/ants"
 )
 
 var sum int32

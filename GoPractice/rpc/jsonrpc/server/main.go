@@ -1,7 +1,7 @@
 package main
 
 import (
-	"../../jsonrpc"
+	demorpc2 "learning-note/GoPractice/rpc/jsonrpc"
 	"log"
 	"net"
 	"net/rpc"
@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	rpc.Register(demorpc.CalculateService{})
+	rpc.Register(demorpc2.CalculateService{})
 	l, e := net.Listen("tcp", ":1234")
 	if e != nil {
 		panic(e)

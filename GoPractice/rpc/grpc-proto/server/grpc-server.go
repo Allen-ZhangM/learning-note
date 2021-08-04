@@ -6,7 +6,7 @@ import (
 	"google.golang.org/grpc"
 	"net"
 	//原型文件路径
-	pt "learning-note/rpc/grpc-proto/proto"
+	pt "learning-note/GoPractice/rpc/grpc-proto/proto"
 )
 
 const (

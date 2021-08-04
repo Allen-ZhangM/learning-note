@@ -1,8 +1,8 @@
 package main
 
 import (
-	demo "../../jsonrpc"
 	"fmt"
+	"learning-note/GoPractice/rpc/jsonrpc"
 	"net"
 	"net/rpc/jsonrpc"
 )
@@ -14,7 +14,7 @@ func main() {
 	client := jsonrpc.NewClient(conn)
 
 	var result float64
-	err := client.Call("CalculateService.Div", demo.Args{3, 5}, &result)
+	err := client.Call("CalculateService.Div", demorpc.Args{3, 5}, &result)
 	fmt.Println(result, err)
 
 }

@@ -1,18 +1,18 @@
 package better
 
 import (
-	"fmt"
 	"flag"
-	"net"
-	"strconv"
-	"time"
-	"strings"
-	"net/http"
+	"fmt"
 	"math/rand"
+	"net"
+	"net/http"
+	"strconv"
+	"strings"
+	"time"
 )
 
 const (
-	LEADER    = iota
+	LEADER = iota
 	CANDIDATE
 	FOLLOWER
 )
@@ -230,7 +230,6 @@ func main() {
 	rs.Port = *port
 
 	rs.Run()
-
 
 }
 
