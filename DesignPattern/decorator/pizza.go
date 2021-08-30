@@ -1,5 +1,8 @@
 package main
 
-type pizza interface {
-	getPrice() int
+type pizza struct {
+}
+
+func (p *pizza) getPrice() int {
+	return 15
 }

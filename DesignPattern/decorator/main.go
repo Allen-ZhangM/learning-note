@@ -4,11 +4,12 @@ import "fmt"
 
 func main() {
 
-	pizza := &veggieMania{}
+	var pizza_ food
+	pizza_ = &pizza{}
 
 	//Add cheese topping
 	pizzaWithCheese := &cheeseTopping{
-		pizza: pizza,
+		pizza: pizza_,
 	}
 
 	//Add tomato topping
@@ -16,5 +17,5 @@ func main() {
 		pizza: pizzaWithCheese,
 	}
 
-	fmt.Printf("Price of veggieMania with tomato and cheese topping is %d\n", pizzaWithCheeseAndTomato.getPrice())
+	fmt.Printf("Price of pizza with tomato and cheese topping is %d\n", pizzaWithCheeseAndTomato.getPrice())
 }

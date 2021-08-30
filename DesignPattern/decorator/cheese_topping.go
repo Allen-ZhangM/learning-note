@@ -1,7 +1,7 @@
 package main
 
 type cheeseTopping struct {
-	pizza pizza
+	pizza food
 }
 
 func (c *cheeseTopping) getPrice() int {
