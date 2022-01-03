@@ -51,3 +51,13 @@ func TestConvertToTitle(t *testing.T) {
 	fmt.Println(convertToTitle(701))
 	fmt.Println(convertToTitle(702))
 }
+
+func TestMajorityElement(t *testing.T) {
+	fmt.Println(majorityElement([]int{2, 2, 1, 1, 1, 2, 2}))
+}
+
+func TestTitleToNumber(t *testing.T) {
+	fmt.Println(titleToNumber("AB"))
+	fmt.Println(titleToNumber("B"))
+	fmt.Println(titleToNumber("ZY"))
+}

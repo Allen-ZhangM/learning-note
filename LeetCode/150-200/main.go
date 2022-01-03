@@ -61,3 +61,42 @@ func convertToTitle(columnNumber int) string {
 	}
 	return res
 }
+
+/**
+169. 多数元素
+给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n/2 ⌋ 的元素。
+
+你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+*/
+func majorityElement(nums []int) int {
+	m := make(map[int]int)
+	for _, v := range nums {
+		if _, ok := m[v]; ok {
+			m[v] += 1
+			continue
+		}
+		m[v] = 1
+	}
+	for k, v := range m {
+		if v > len(nums)/2 {
+			return k
+		}
+	}
+	return 0
+}
+
+/**
+171. Excel 表列序号
+给你一个字符串 columnTitle ，表示 Excel 表格中的列名称。返回该列名称对应的列序号。
+*/
+func titleToNumber(columnTitle string) int {
+	n := 0
+	for i := 0; i < len(columnTitle); i++ {
+		tem := int(columnTitle[i] - 64)
+		for j := len(columnTitle) - 1 - i; j > 0; j-- {
+			tem *= 26
+		}
+		n += tem
+	}
+	return n
+}
