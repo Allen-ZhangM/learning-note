@@ -113,3 +113,27 @@ func TestIsSameTree(t *testing.T) {
 	}
 	fmt.Println(isSameTree(r, r2))
 }
+
+func TestReverseBetween(t *testing.T) {
+	r := &ListNode{
+		Val: 1,
+		Next: &ListNode{
+			Val: 2,
+			Next: &ListNode{
+				Val: 3,
+				Next: &ListNode{
+					Val: 4,
+					Next: &ListNode{
+						Val: 5,
+						Next: &ListNode{
+							Val:  6,
+							Next: nil,
+						},
+					},
+				},
+			},
+		},
+	}
+	res := reverseBetween(r, 3, 4)
+	fmt.Println(res)
+}
