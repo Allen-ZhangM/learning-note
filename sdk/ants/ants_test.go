@@ -29,7 +29,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/panjf2000/ants"
+	"learning-note/sdk/ants"
 )
 
 const (
