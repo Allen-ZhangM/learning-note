@@ -6,6 +6,11 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
 /**
 101. 对称二叉树
 */
@@ -193,4 +198,30 @@ func hasPathSum(root *TreeNode, targetSum int) bool {
 	}
 	getNodeSum(root, 0)
 	return res
+}
+
+/**
+136. 只出现一次的数字
+*/
+func singleNumber(nums []int) int {
+	single := 0
+	for _, num := range nums {
+		single ^= num
+	}
+	return single
+}
+
+/**
+141. 环形链表
+*/
+func hasCycle(head *ListNode) bool {
+	m := make(map[*ListNode]struct{})
+	for head != nil {
+		if _, ok := m[head]; ok {
+			return true
+		}
+		m[head] = struct{}{}
+		head = head.Next
+	}
+	return false
 }

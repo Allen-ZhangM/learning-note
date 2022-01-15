@@ -47,6 +47,22 @@ func dfs(root *Node) []int {
 	return resp
 }
 
+func dfs2(root *Node) []int {
+	var resp []int
+	var f func(node *Node)
+	f = func(node *Node) {
+		if node == nil {
+			return
+		}
+		resp = append(resp, node.Value)
+		for _, v := range node.Children {
+			f(v)
+		}
+	}
+	f(root)
+	return resp
+}
+
 func main() {
 	r := &Node{
 		Value: 1,
@@ -84,5 +100,7 @@ func main() {
 			},
 		},
 	}
+	fmt.Println(bfs(r))
 	fmt.Println(dfs(r))
+	fmt.Println(dfs2(r))
 }

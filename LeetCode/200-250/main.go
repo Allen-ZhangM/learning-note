@@ -161,3 +161,46 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	dfs(root, p, q)
 	return ans
 }
+
+/**
+226. 翻转二叉树
+*/
+func invertTree(root *TreeNode) *TreeNode {
+	var f func(tree *TreeNode)
+	f = func(tree *TreeNode) {
+		if tree == nil {
+			return
+		}
+		if tree.Left == nil && tree.Right == nil {
+			return
+		}
+		tree.Left, tree.Right = tree.Right, tree.Left
+		f(tree.Left)
+		f(tree.Right)
+	}
+	f(root)
+	return root
+}
+
+/**
+234. 回文链表
+*/
+func isPalindrome(head *ListNode) bool {
+	var sli []*ListNode
+	m := head
+	for head != nil && head.Next != nil {
+		sli = append(sli, m)
+		m = m.Next
+		head = head.Next.Next
+	}
+	if head != nil {
+		m = m.Next
+	}
+	for i := len(sli) - 1; i >= 0; i-- {
+		if sli[i].Val != m.Val {
+			return false
+		}
+		m = m.Next
+	}
+	return true
+}

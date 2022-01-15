@@ -85,3 +85,14 @@ func TestHasPathSum(t *testing.T) {
 	}
 	fmt.Println(hasPathSum(r, 3))
 }
+
+func TestHasCycle(t *testing.T) {
+	n := &ListNode{
+		Val: 1,
+		Next: &ListNode{
+			Val:  2,
+			Next: nil,
+		},
+	}
+	fmt.Println(hasCycle(n))
+}
