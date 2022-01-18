@@ -1,9 +1,49 @@
 package main
 
+import "math"
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
 	Right *TreeNode
+}
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+/**
+23. 合并K个升序链表
+*/
+func mergeKLists(lists []*ListNode) *ListNode {
+	resp := &ListNode{
+		Val:  -1,
+		Next: nil,
+	}
+	cur := resp
+	for {
+		min := math.MaxInt32
+		minIndex := -1
+		for i := 0; i < len(lists); i++ {
+			if lists[i] != nil {
+				if lists[i].Val < min {
+					min = lists[i].Val
+					minIndex = i
+				}
+			}
+		}
+		if minIndex == -1 {
+			break
+		}
+		cur.Next = &ListNode{
+			Val:  min,
+			Next: nil,
+		}
+		cur = cur.Next
+		lists[minIndex] = lists[minIndex].Next
+	}
+	return resp.Next
 }
 
 /**
