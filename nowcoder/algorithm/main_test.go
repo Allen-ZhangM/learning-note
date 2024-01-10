@@ -362,3 +362,33 @@ func hasPathSumLoop(root *TreeNode) int {
 	}
 	return root.Val + hasPathSumLoop(root.Left) + hasPathSumLoop(root.Right)
 }
+
+func TestBM21(t *testing.T) {
+	fmt.Println(minNumberInRotateArray([]int{4, 5, 1, 2, 3}))
+	fmt.Println(minNumberInRotateArray([]int{3, 4, 5, 1, 2}))
+	fmt.Println(minNumberInRotateArray([]int{3, 100, 200, 3}))
+	fmt.Println(minNumberInRotateArray([]int{1, 0, 1, 1, 1}))
+}
+
+func minNumberInRotateArray(nums []int) int {
+	// write code here
+
+	if len(nums) == 0 {
+		return 0
+	}
+
+	l := 0
+	r := len(nums) - 1
+
+	for l < r {
+		m := (l + r) / 2
+		if nums[m] < nums[r] {
+			r = m
+		} else if nums[m] > nums[r] {
+			l = m + 1
+		} else {
+			r--
+		}
+	}
+	return nums[l]
+}
