@@ -392,3 +392,31 @@ func minNumberInRotateArray(nums []int) int {
 	}
 	return nums[l]
 }
+
+func TestBM10(t *testing.T) {
+	l1 := GenIntListNode([]int{1, 2, 3})
+	l2 := GenIntListNode([]int{4, 5})
+	common := GenIntListNode([]int{6, 7})
+	l1.Next = common
+	l2.Next = common
+	PrintListNode(FindFirstCommonNode(l1, l2))
+}
+
+func FindFirstCommonNode(pHead1 *ListNode, pHead2 *ListNode) *ListNode {
+	// write code here
+	l1 := pHead1
+	l2 := pHead2
+	for l1 != l2 {
+		if l1 == nil {
+			l1 = pHead2
+		} else {
+			l1 = l1.Next
+		}
+		if l2 == nil {
+			l2 = pHead1
+		} else {
+			l2 = l2.Next
+		}
+	}
+	return l1
+}
