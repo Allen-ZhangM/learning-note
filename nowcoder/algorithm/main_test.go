@@ -49,38 +49,43 @@ func ReverseList(head *ListNode) *ListNode {
 }
 
 func TestBM2(t *testing.T) {
-	reverseBetween(GenIntListNode([]int{1, 2, 3, 4, 5}), 2, 4)
+	PrintListNode(reverseBetween(GenIntListNode([]int{1, 2, 3, 4, 5}), 2, 4))
+	PrintListNode(reverseBetween(GenIntListNode([]int{5}), 1, 1))
 }
 
 func reverseBetween(head *ListNode, m int, n int) *ListNode {
-	temp := head
-	right := head
-	var left *ListNode
-	i := 1
-	for temp != nil {
-		if i == m {
-			left = temp
-		}
-		if i == n {
-			right.Next = nil
-		}
+	resp := &ListNode{Next: head}
+	pre := resp
 
-		i++
-		temp = temp.Next
-		if i <= n {
-			right = right.Next
-		}
+	for i := 0; i < m-1; i++ {
+		pre = pre.Next
 	}
+
+	right := pre
+
+	for i := m - 1; i < n; i++ {
+		right = right.Next
+	}
+
+	left := pre.Next
+	tail := right.Next
+
+	pre.Next = nil
+	right.Next = nil
 
 	var respLeft *ListNode
-	for left != nil {
-		tem := left.Next
-		left.Next = respLeft
-		respLeft = left
-		left = tem
+	curr := left
+	for curr != nil {
+		tem := curr.Next
+		curr.Next = respLeft
+		respLeft = curr
+		curr = tem
 	}
 
-	return head
+	pre.Next = respLeft
+	left.Next = tail
+
+	return resp.Next
 }
 
 func TestBM4(t *testing.T) {
@@ -419,4 +424,96 @@ func FindFirstCommonNode(pHead1 *ListNode, pHead2 *ListNode) *ListNode {
 		}
 	}
 	return l1
+}
+
+func TestBM13(t *testing.T) {
+	fmt.Println(isPail(GenIntListNode([]int{1, 2, 3, 4, 3, 2, 1})))
+	fmt.Println(isPail(GenIntListNode([]int{1, 2, 3, 3, 2, 1})))
+	fmt.Println(isPail(GenIntListNode([]int{1, 2, 3})))
+	fmt.Println(isPail(GenIntListNode([]int{1})))
+	fmt.Println(isPail(GenIntListNode([]int{})))
+}
+
+func isPail(head *ListNode) bool {
+	// write code here
+
+	f := func(head *ListNode) *ListNode {
+		var resp *ListNode
+		for head != nil {
+			tem := head.Next
+			head.Next = resp
+			resp = head
+			head = tem
+		}
+		return resp
+	}
+
+	fast := head
+	slow := head
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+	}
+
+	slow = f(slow)
+
+	for slow != nil {
+		if slow.Val != head.Val {
+			return false
+		}
+		head = head.Next
+		slow = slow.Next
+	}
+
+	return true
+}
+
+func TestBM15(t *testing.T) {
+	PrintListNode(deleteDuplicates(GenIntListNode([]int{1, 2, 2, 3, 4})))
+	PrintListNode(deleteDuplicates(GenIntListNode([]int{1, 1})))
+}
+
+func deleteDuplicates(head *ListNode) *ListNode {
+	// write code here
+	if head == nil {
+		return head
+	}
+	curr := head
+
+	for curr != nil && curr.Next != nil {
+		if curr.Val == curr.Next.Val {
+			curr.Next = curr.Next.Next
+		} else {
+			curr = curr.Next
+		}
+	}
+
+	return head
+}
+
+func TestBM16(t *testing.T) {
+	PrintListNode(deleteDuplicates2(GenIntListNode([]int{1, 2, 2, 3, 4})))
+	PrintListNode(deleteDuplicates2(GenIntListNode([]int{1, 1})))
+}
+
+func deleteDuplicates2(head *ListNode) *ListNode {
+	// write code here
+	if head == nil {
+		return head
+	}
+	resp := &ListNode{Next: head}
+	curr := resp
+	for curr.Next != nil && curr.Next.Next != nil {
+		if curr.Next.Val == curr.Next.Next.Val {
+			tem := curr.Next.Val
+			for curr.Next != nil && curr.Next.Val == tem {
+				curr.Next = curr.Next.Next
+			}
+
+		} else {
+			curr = curr.Next
+		}
+	}
+
+	return resp.Next
 }
