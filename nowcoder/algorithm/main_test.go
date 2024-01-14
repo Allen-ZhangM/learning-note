@@ -517,3 +517,57 @@ func deleteDuplicates2(head *ListNode) *ListNode {
 
 	return resp.Next
 }
+
+func TestBM19(t *testing.T) {
+	fmt.Println(findPeakElement([]int{1, 2, 3, 1}))
+}
+
+func findPeakElement(nums []int) int {
+	// write code here
+	l := 0
+	r := len(nums) - 1
+
+	for l < r {
+		m := (l + r) / 2
+		if nums[m] > nums[m+1] {
+			r = m
+		} else {
+			l = m + 1
+		}
+	}
+	return r
+}
+
+func TestBM26(t *testing.T) {
+	fmt.Println(levelOrder(ArrayToTree2([]string{"3", "9", "20", "", "", "15", "7"})))
+	fmt.Println(levelOrder(ArrayToTree2([]string{})))
+}
+
+func levelOrder(root *TreeNode) [][]int {
+	// write code here
+
+	if root == nil {
+		return nil
+	}
+	queue := []*TreeNode{root}
+	var resp [][]int
+
+	for len(queue) > 0 {
+		var levelNums []int
+		queueSize := len(queue)
+		for i := 0; i < queueSize; i++ {
+			levelNums = append(levelNums, queue[i].Val)
+			if queue[i].Left != nil {
+
+				queue = append(queue, queue[i].Left)
+			}
+			if queue[i].Right != nil {
+
+				queue = append(queue, queue[i].Right)
+			}
+		}
+		queue = queue[queueSize:]
+		resp = append(resp, levelNums)
+	}
+	return resp
+}
